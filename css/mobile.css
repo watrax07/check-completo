@@ -1,6 +1,5 @@
 @media screen and (max-width: 1180px) {
   .hero {
-    grid-template-columns: 1fr;
     min-height: auto;
   }
 
@@ -8,13 +7,8 @@
     max-width: 10.5ch;
   }
 
-  .hero-panel {
-    min-height: 560px;
-  }
-
-  .hero-panel-top {
-    flex-direction: column;
-    gap: 12px;
+  .hero-visual-grid {
+    grid-template-columns: 1fr;
   }
 
   .price-card {
@@ -235,18 +229,38 @@
     padding: 24px;
   }
 
-  .hero-title {
-    max-width: 100%;
-    font-size: clamp(2.4rem, 9vw, 3.6rem);
-  }
-
   .hero-subtitle,
   .section-subtitle {
     font-size: 0.98rem;
   }
 
-  .hero-actions,
-  .hero-proof {
+  .hero {
+    gap: 18px;
+  }
+
+  .hero-unified {
+    max-width: 100%;
+  }
+
+  .hero-visual-board {
+    padding: 18px;
+    gap: 16px;
+  }
+
+  .hero-visual-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-image {
+    width: min(100%, 280px);
+  }
+
+  .hero-highlight-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-actions {
     width: 100%;
   }
 
@@ -255,51 +269,26 @@
     width: 100%;
   }
 
-  .hero-panel {
-    min-height: auto;
-    padding: 18px;
-    animation: none;
-  }
-
-  .hero-panel-top {
-    gap: 10px;
-  }
-
-  .hero-badge-card {
-    max-width: 100%;
-    padding: 20px;
-  }
-
-  .hero-badge-card h2 {
-    font-size: 1.35rem;
-  }
-
-  .hero-floating-card {
-    position: static;
-    min-width: 0;
-    max-width: none;
-    padding: 14px 16px;
-    margin-top: 12px;
-    animation: none;
-  }
-
-  .hero-panel-bottom {
-    margin-top: 18px;
+  .pricing-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     gap: 12px;
+    margin-bottom: 16px;
   }
 
-  .card-top {
-    position: static;
-    margin-top: 18px;
+  .pricing-controls .gallery-control-btn {
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    background: rgba(226, 45, 68, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.12);
   }
 
-  .card-bottom {
-    width: 100%;
-    margin-left: 0;
-  }
-
-  .hero-mini-proof {
-    flex-direction: column;
+  .pricing-dots {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
   }
 
   .gallery-carousel-shell {
@@ -423,13 +412,7 @@
   }
 
   .logo-wordmark {
-    width: 168px;
-  }
-
-  .logo-wheel {
-    width: 36px;
-    left: -8px;
-    top: -4px;
+    width: 160px;
   }
 
   .hero,
@@ -454,20 +437,11 @@
     font-size: 2.2rem;
   }
 
-  .hero-panel {
-    min-height: auto;
-  }
-
   .nav-menu {
     width: calc(100vw - 24px);
     right: 12px;
     top: 12px;
     height: calc(100vh - 24px);
-  }
-
-  .card-top,
-  .card-bottom {
-    animation: none;
   }
 
   .section-title {
