@@ -817,6 +817,16 @@
       compareDivider.style.left = `${value}%`;
     }
 
+    function updateCompareFromPointer(clientX) {
+      if (!compare || !compareRange) return;
+      const rect = compare.getBoundingClientRect();
+      const raw = ((clientX - rect.left) / rect.width) * 100;
+      const value = Math.max(0, Math.min(100, raw));
+      compareValue = value;
+      compareRange.value = value;
+      updateCompare(value);
+    }
+
     function stepCompareAutoplay() {
       if (!compareAutoplay || !compareRange) return;
       const isMobileCompare = window.innerWidth <= 768;
@@ -846,6 +856,48 @@
       compareRange.addEventListener('pointerdown', stopCompareAutoplay);
       compareRange.addEventListener('touchstart', stopCompareAutoplay, { passive: true });
       compareAnimationFrame = requestAnimationFrame(stepCompareAutoplay);
+    }
+
+    if (compare) {
+      let compareDragging = false;
+
+      compare.addEventListener('pointerdown', (event) => {
+        compareDragging = true;
+        stopCompareAutoplay();
+        updateCompareFromPointer(event.clientX);
+      });
+
+      compare.addEventListener('pointermove', (event) => {
+        if (!compareDragging) return;
+        updateCompareFromPointer(event.clientX);
+      });
+
+      compare.addEventListener('pointerup', () => {
+        compareDragging = false;
+      });
+
+      compare.addEventListener('pointerleave', () => {
+        compareDragging = false;
+      });
+
+      compare.addEventListener('touchstart', (event) => {
+        const touch = event.touches[0];
+        if (!touch) return;
+        compareDragging = true;
+        stopCompareAutoplay();
+        updateCompareFromPointer(touch.clientX);
+      }, { passive: true });
+
+      compare.addEventListener('touchmove', (event) => {
+        if (!compareDragging) return;
+        const touch = event.touches[0];
+        if (!touch) return;
+        updateCompareFromPointer(touch.clientX);
+      }, { passive: true });
+
+      compare.addEventListener('touchend', () => {
+        compareDragging = false;
+      });
     }
 
     let currentSlide = 0;

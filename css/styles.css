@@ -13,6 +13,10 @@
   --accent-strong: #e22d44;
   --accent-soft: rgba(184, 15, 47, 0.22);
   --line: rgba(255, 255, 255, 0.12);
+  --page-bg:
+    radial-gradient(circle at top left, rgba(226, 45, 68, 0.2), transparent 30%),
+    radial-gradient(circle at 85% 12%, rgba(130, 15, 34, 0.18), transparent 26%),
+    linear-gradient(180deg, #06070b 0%, #0c0a10 45%, #09070b 100%);
   --shadow-sm: 0 12px 30px rgba(2, 8, 18, 0.18);
   --shadow-md: 0 22px 60px rgba(2, 8, 18, 0.28);
   --shadow-lg: 0 32px 90px rgba(2, 8, 18, 0.42);
@@ -38,10 +42,7 @@ body {
   min-height: 100vh;
   font-family: 'Archivo', sans-serif;
   color: var(--text);
-  background:
-    radial-gradient(circle at top left, rgba(226, 45, 68, 0.2), transparent 30%),
-    radial-gradient(circle at 85% 12%, rgba(130, 15, 34, 0.18), transparent 26%),
-    linear-gradient(180deg, #06070b 0%, #0c0a10 45%, #09070b 100%);
+  background: var(--page-bg);
   line-height: 1.6;
   overflow-x: hidden;
 }
@@ -469,6 +470,8 @@ textarea {
   border: 0;
   background: transparent;
   box-shadow: none;
+  touch-action: none;
+  user-select: none;
 }
 
 .hero-compare-image {
@@ -496,6 +499,7 @@ textarea {
   inset: 0;
   overflow: hidden;
   clip-path: inset(0 calc(100% - var(--compare-pos)) 0 0);
+  background: transparent;
 }
 
 .hero-compare-divider {
@@ -595,6 +599,7 @@ textarea {
   opacity: 0;
   cursor: ew-resize;
   z-index: 4;
+  touch-action: none;
 }
 
 .hero-media-badges {
