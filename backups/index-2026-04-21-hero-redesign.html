@@ -62,36 +62,24 @@
   <main class="container">
     <section class="hero section-shell" id="inicio">
       <div class="hero-unified fade-in">
-        <div class="hero-sales-card">
-          <div class="hero-media-stack">
-            
-            <div class="hero-compare" data-compare>
-              <img src="imgs/chocado.png" alt="Auto chocado" class="hero-compare-image">
-              <div class="hero-compare-overlay" data-compare-overlay>
-                <img src="imgs/bien.png" alt="Auto en buen estado" class="hero-compare-image">
-              </div>
-              <div class="hero-compare-divider" data-compare-divider>
-                <span class="hero-compare-handle">
-                  <i class="fas fa-hand-pointer"></i>
-                </span>
-              </div>
-              <input type="range" min="0" max="100" value="52" class="hero-compare-range" aria-label="Comparar auto chocado y auto en buen estado" data-compare-range>
-            </div>
-            <div class="hero-media-badges">
-              <span><i class="fas fa-screwdriver-wrench"></i> Mecanica</span>
-              <span><i class="fas fa-scale-balanced"></i> Legal</span>
-              <span><i class="fas fa-camera"></i> Evidencia</span>
-            </div>
+        <div class="hero-visual-board">
+          <div class="hero-visual-center">
+            <img src="imgs/CARRITO.png" alt="Vehiculo inspeccionado por CheckAutos" class="hero-image">
           </div>
 
-          <div class="hero-copy-strip">
-            <h1 class="hero-title">Un <span>auto</span> con buen aspecto tambien puede esconder problemas.</h1>
-            <p class="hero-subtitle hero-subtitle-tight">Inspeccion mecanica, legal y visual para detectar riesgos antes de comprar y negociar con informacion real.</p>
+          <div class="hero-visual-card main-card">
+            <span class="eyebrow hero-eyebrow">
+              <i class="fas fa-shield-halved"></i>
+              CheckAutos
+            </span>
+            <p class="hero-subtitle hero-subtitle-tight">Inspeccion mecanica, legal y visual para detectar riesgos antes de comprar.</p>
+
             <div class="hero-highlight-row">
-              <span><i class="fas fa-location-dot"></i> A domicilio</span>
-              <span><i class="fas fa-camera"></i> Fotos y video</span>
+              <span><i class="fas fa-location-dot"></i> Servicio a domicilio</span>
+              <span><i class="fas fa-camera"></i> Fotos y videos</span>
               <span><i class="fas fa-file-lines"></i> Reporte claro</span>
             </div>
+
             <div class="hero-actions">
               <a href="https://api.whatsapp.com/send?phone=51959365374&text=Hola%2C%20quiero%20cotizar%20una%20revision%20vehicular." class="cta-button" target="_blank" rel="noopener">
                 <i class="fab fa-whatsapp"></i>
@@ -100,11 +88,42 @@
               <a href="#precios" class="ghost-button">Ver planes</a>
             </div>
           </div>
+
+          <div class="hero-visual-grid">
+            <article class="hero-visual-card mini-card">
+              <i class="fas fa-magnifying-glass-chart"></i>
+              <strong>Diagnostico real</strong>
+            </article>
+            <article class="hero-visual-card mini-card">
+              <i class="fas fa-scale-balanced"></i>
+              <strong>Revision legal</strong>
+            </article>
+            <article class="hero-visual-card mini-card">
+              <i class="fas fa-file-circle-check"></i>
+              <strong>Reporte claro</strong>
+            </article>
+          </div>
         </div>
-        <a href="#video-principal" class="hero-scroll-cue" aria-label="Desplazarse hacia abajo">
-          <i class="fas fa-arrow-down"></i>
-        </a>
       </div>
+    </section>
+
+    <section class="stats-strip fade-in">
+      <article>
+        <strong>95%</strong>
+        <span>de compradores llegan con dudas tecnicas y legales</span>
+      </article>
+      <article>
+        <strong>3 capas</strong>
+        <span>revision mecanica, documental y visual en una sola visita</span>
+      </article>
+      <article>
+        <strong>Mismo dia</strong>
+        <span>reporte resumido para decidir rapido</span>
+      </article>
+      <article>
+        <strong>Soporte real</strong>
+        <span>acompanamiento por WhatsApp antes y despues</span>
+      </article>
     </section>
 
     <section class="video-principal section-shell fade-in" id="video-principal">
@@ -715,7 +734,6 @@
     const navLinks = document.querySelectorAll('.nav-link');
     const header = document.querySelector('.header');
     const floatButton = document.querySelector('.float');
-    const heroScrollCue = document.querySelector('.hero-scroll-cue');
 
     function setMenuState(isOpen) {
       hamburger.classList.toggle('active', isOpen);
@@ -767,10 +785,6 @@
       } else {
         header.classList.remove('scrolled');
       }
-
-      if (heroScrollCue) {
-        heroScrollCue.classList.toggle('hidden', window.pageYOffset > 12);
-      }
     }
 
     window.addEventListener('scroll', handleHeaderState);
@@ -800,52 +814,6 @@
         playOverlay.style.opacity = '1';
         playOverlay.style.pointerEvents = 'all';
       });
-    }
-
-    const compare = document.querySelector('[data-compare]');
-    const compareOverlay = document.querySelector('[data-compare-overlay]');
-    const compareDivider = document.querySelector('[data-compare-divider]');
-    const compareRange = document.querySelector('[data-compare-range]');
-    let compareAnimationFrame;
-    let compareDirection = 1;
-    let compareValue = compareRange ? Number(compareRange.value) : 52;
-    let compareAutoplay = true;
-
-    function updateCompare(value) {
-      if (!compare || !compareDivider) return;
-      compare.style.setProperty('--compare-pos', `${value}%`);
-      compareDivider.style.left = `${value}%`;
-    }
-
-    function stepCompareAutoplay() {
-      if (!compareAutoplay || !compareRange) return;
-      const isMobileCompare = window.innerWidth <= 768;
-      const compareStep = isMobileCompare ? 0.28 : 0.18;
-      const maxCompare = isMobileCompare ? 82 : 78;
-      const minCompare = isMobileCompare ? 20 : 24;
-      compareValue += compareDirection * compareStep;
-      if (compareValue >= maxCompare) compareDirection = -1;
-      if (compareValue <= minCompare) compareDirection = 1;
-      compareRange.value = compareValue;
-      updateCompare(compareValue);
-      compareAnimationFrame = requestAnimationFrame(stepCompareAutoplay);
-    }
-
-    function stopCompareAutoplay() {
-      compareAutoplay = false;
-      if (compareAnimationFrame) cancelAnimationFrame(compareAnimationFrame);
-    }
-
-    if (compareRange) {
-      updateCompare(compareRange.value);
-      compareRange.addEventListener('input', (event) => {
-        compareValue = Number(event.target.value);
-        stopCompareAutoplay();
-        updateCompare(event.target.value);
-      });
-      compareRange.addEventListener('pointerdown', stopCompareAutoplay);
-      compareRange.addEventListener('touchstart', stopCompareAutoplay, { passive: true });
-      compareAnimationFrame = requestAnimationFrame(stepCompareAutoplay);
     }
 
     let currentSlide = 0;
